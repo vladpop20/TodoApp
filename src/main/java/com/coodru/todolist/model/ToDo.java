@@ -2,16 +2,11 @@ package com.coodru.todolist.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table
@@ -24,9 +19,13 @@ public class ToDo {
 	private Long id;
 
 	@NotBlank(message = "Title must not be empty")
+	@NotNull(message = "Invalid title: Title is NULL")
+	@Size(min = 3, max = 200, message = "Invalid title: Must be of 3 - 200 characters")
 	private String title;
 
 	@NotBlank(message = "Description must not be empty")
+	@NotNull(message = "Invalid description: desc is NULL")
+	@Size(min = 3, message = "Invalid description: Must be of minimum 3 characters")
 	private String description;
 
 	@NotNull
@@ -35,6 +34,7 @@ public class ToDo {
 	private LocalDate dueDate;
 
 	@NotBlank(message = "The status is mandatory")
+	@NotNull(message = "Invalid status: status is NULL")
 	@Pattern(regexp = "^(To Do|In Progress|Done)$", message = "Invalid status type")
 	private String status;
 }
