@@ -8,9 +8,11 @@ public interface ToDoService {
 
 	ToDo createToDo(ToDo toDo);
 
-	List<ToDo> getToDoList();
+	List<ToDo> getToDoList(int page, int limit);
 
-	ToDo getToDo (Long id);
+	ToDo getToDo (Long toDoId);
 
-	ToDo updateToDo(ToDo todo, Long id);
+	ToDo updateToDo(ToDo todo, Long toDoId);
+
+	void deleteToDo(Long toDoId);
 }
